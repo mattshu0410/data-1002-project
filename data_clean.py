@@ -118,12 +118,12 @@ p1 = (ggplot(merged_data, aes(x="GNI_capita", y="hf_score", color = 'Happiness.S
       geom_point() +
       xlab("GNI per Capita (PPP)") +
       ylab("Human Freedom Score") +
-      labs(title = "Human Freedom Score versus GNI per Capita by PPP"))
+      labs(title = "Human Freedom Score versus GNI per Capita by Happiness Score"))
 p2 = (ggplot(merged_data, aes(x="GNI_capita", y="Happiness.Score", color = 'hf_score'))+ \
       geom_point() +
       xlab("GNI per Capita (PPP)") +
       ylab("Happiness Score") +
-      labs(title = "Human Freedom Score versus GNI per Capita by Happiness Score"))
+      labs(title = "Happiness versus GNI per Capita by Human Freedom Score"))
 print(p1,p2)
 
 #Inconsistent Values TO DO
