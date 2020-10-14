@@ -58,7 +58,7 @@ merged_data.drop_duplicates()
 
 #Output the dataset
 print(merged_data)
-#merged_data.to_csv(r'C:\Users\bigha\OneDrive\University Notes\First Year SEM 2\DATA1002\Project\merged_data.csv',index = False)
+merged_data.to_csv(r'C:\Users\bigha\OneDrive\University Notes\First Year SEM 2\DATA1002\Project\merged_data.csv',index = False)
 
 
 
@@ -97,23 +97,26 @@ for column_name in merged_data:
 #Changes data from string to numerical values
 merged_data['hf_score'] = pd.to_numeric(merged_data['hf_score'])
 
-#Preliminary Summary
+#Basic Summary
 print("Happiness Data Summary")
-print(merged_data['Happiness.Score'].describe())
+happiness_summary = merged_data['Happiness.Score'].describe()
+print(happiness_summary)
 print("Maximum Happiness in:", merged_data.loc[merged_data['Happiness.Score'].idxmax(),'countries'])
 print("Minimum Happiness in:", merged_data.loc[merged_data['Happiness.Score'].idxmin(),'countries'])
 
-
 print("Human Freedom Data Summary")
-print(merged_data['hf_score'].describe())
+hf_summary = merged_data['hf_score'].describe()
+print(hf_summary)
 print("Maximum Human Freedom in:", merged_data.loc[merged_data['hf_score'].idxmax(),'countries'])
 print("Minimum Human Freedom in:", merged_data.loc[merged_data['hf_score'].idxmin(),'countries'])
 
 print("GNI/capita Data Summary")
-print(merged_data['GNI_capita'].describe())
+GNI_summary = merged_data['GNI_capita'].describe()
+print(GNI_summary)
 print("Maximum GNI/capita in:", merged_data.loc[merged_data['GNI_capita'].idxmax(),'countries'])
 print("Minimum GNI/capita in:", merged_data.loc[merged_data['GNI_capita'].idxmin(),'countries'])
 
+#Basic Plots
 p1 = (ggplot(merged_data, aes(x="GNI_capita", y="hf_score", color = 'Happiness.Score'))+
       geom_point() +
       xlab("GNI per Capita (PPP)") +
@@ -126,11 +129,21 @@ p2 = (ggplot(merged_data, aes(x="GNI_capita", y="Happiness.Score", color = 'hf_s
       labs(title = "Happiness versus GNI per Capita by Human Freedom Score"))
 print(p1,p2)
 
-#Inconsistent Values TO DO
-#Missing Values TO DO
-#Default Values TO DO
-#Incorrect Values TO DO
-
-
-#Preliminary Summary
-#
+#Grouped Aggregates
+#Average GNI for each quartile of Happiness
+merged_data["Happiness_Quartile"] = pd.qcut(merged_data["Happiness.Score"], q=4, labels=[1,2,3,4])
+print(merged_data.groupby("Happiness_Quartile").agg(
+    average_GNI_capita = pd.NamedAgg(column = "GNI_capita", aggfunc=np.mean)
+))
+#Maximum Happiness grouped by Region
+print(merged_data.groupby("region")["Happiness.Score"].max())
+#SD of happiness in each Income Brackets
+merged_data["GNI_capita_bins"] = pd.cut(merged_data["GNI_capita"], bins=[0,1025,4035,12475,float('inf')]) #These values from World Bank, Max is Arbitrary
+print(merged_data.groupby("GNI_capita_bins").agg(
+    sd_happiness = pd.NamedAgg(column="Happiness.Score", aggfunc=np.std)
+))
+#Median GNI/capita for each quartile of Freedom Index
+merged_data["Freedom_Quartile"] = pd.qcut(merged_data["hf_score"], q=4, labels=[1,2,3,4])
+print(merged_data.groupby("Freedom_Quartile").agg(
+    median_GNI_capita = pd.NamedAgg(column = "GNI_capita", aggfunc=np.median)
+))
