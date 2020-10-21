@@ -12,5 +12,7 @@ https://www.kaggle.com/gsutters/the-human-freedom-index?select=hfi_cc_2019.csv
 GNI per capita by Purchasing Power Parity
 https://data.worldbank.org/indicator/NY.GNP.PCAP.PP.KD
 
+ISO Alpha-3 Codes
+https://www.kaggle.com/juanumusic/countries-iso-codes
 
 Please create a pull request every time you add new features to the code. These can then be reviewed and synced with the main branch.
