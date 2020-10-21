@@ -32,7 +32,7 @@ iso_code = iso_code.rename(columns={"English short name lower case":"countries",
 #Add ISO Code to World Happiness (It doesn't originally have ISO code)
 world_happiness = pd.merge(world_happiness, iso_code, on=["countries"])
 
-#Drops redundant country columns from Freedom Index, GNI/capita
+#Drops duplicate country columns from Freedom Index, GNI/capita
 del gni_capita_2017['countries']
 del world_happiness['countries']
 
@@ -66,7 +66,7 @@ merged_data.to_csv(r'C:\Users\bigha\OneDrive\University Notes\First Year SEM 2\D
 print((merged_data["hf_score"].astype(float) >= 0).all() and (merged_data["hf_score"].astype(float) <= 10).all()) #Between 0 and 10 inclusive
 print((merged_data["Happiness.Score"].astype(float) >= 0).all() and (merged_data["Happiness.Score"].astype(float) <= 10).all()) #Between 0 and 10 inclusive
 print((merged_data["hf_rank"].astype(float) >= 1).all() and (merged_data["hf_rank"].astype(float) <= 159).all()) #Between 1 and 159 inclusive
-print((merged_data["Happiness.Rank"].astype(float) >= 1).all() and (merged_data["Happiness.Rank"].astype(float) <= 155).all())
+print((merged_data["Happiness.Rank"].astype(float) >= 1).all() and (merged_data["Happiness.Rank"].astype(float) <= 155).all()) #Between 1 and 155 inclusive
 print((merged_data["GNI_capita"].astype(float) >= 0).all()) #Ensuring non-negative values
 
 

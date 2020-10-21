@@ -1,0 +1,1 @@
+Whilst our four datasets are submitted with the project the Python code itself is written such that it pulls raw data from our Github repository directly. This was acceptable according to Josh Burridge.
