@@ -7,9 +7,9 @@ from plotnine import *
 #Reading in the data
 world_happiness = pd.read_csv("https://raw.githubusercontent.com/mattshu0410/data-1002-project/master/world_happiness_2017.csv")
 freedom_index = pd.read_csv("https://raw.githubusercontent.com/mattshu0410/data-1002-project/master/hfi_cc_2019.csv")
-gni_capita = pd.read_csv("https://raw.githubusercontent.com/mattshu0410/data-1002-project/master/GNI_percapita_ppp.csv")
+#Deprecated gni_capita = pd.read_csv("https://raw.githubusercontent.com/mattshu0410/data-1002-project/master/GNI_percapita_ppp.csv")
 iso_code = pd.read_csv("https://raw.githubusercontent.com/mattshu0410/data-1002-project/master/wikipedia-iso-country-codes.csv")
-
+gni_capita = pd.read_csv("https://raw.githubusercontent.com/mattshu0410/data-1002-project/master/GNI_percapita_atlas.csv")
 #Extract only 2017 Data for Freedom Index
 index_not_2017 = freedom_index[freedom_index["year"] != 2017].index
 freedom_index.drop(index_not_2017, inplace=True)
